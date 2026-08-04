@@ -1,436 +1,454 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luna Jing — Brew With Your Cycle</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#1C1710;--muted:#7A6A54;--faint:#B8A898;
-  --parch:#FAF7F2;--parch2:#F2EDE3;--parch3:#E8E0D0;
-  --gold:#A8822A;--gold2:#C8A84A;
-  --sage:#4A6248;--plum:#3C2840;--terra:#7A3E1E;
-  --border:#DDD4C0;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--parch);color:var(--ink);line-height:1.6;font-size:15px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 48px;border-bottom:1px solid var(--border);background:var(--parch);position:sticky;top:0;z-index:100}
-.nav-brand{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-0.01em;cursor:pointer}
-.nav-brand em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:26px}
-.nav-links{display:flex;gap:32px}
-.nav-links a{text-decoration:none;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;cursor:pointer}
-.nav-links a:hover,.nav-links a.active{color:var(--ink)}
-.nav-cta{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--ink);padding:9px 20px;color:var(--ink);transition:all 0.2s;cursor:pointer;background:none}
-.nav-cta:hover{background:var(--ink);color:var(--parch)}
-.page{display:none}.page.active{display:block}
-.btn-ghost{display:inline-block;padding:14px 36px;border:1px solid rgba(200,168,74,0.5);color:#FAF7F2;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;cursor:pointer;background:none}
-.btn-ghost:hover{background:rgba(200,168,74,0.12);border-color:var(--gold2)}
-.btn-dark{display:inline-block;padding:14px 36px;border:1px solid var(--ink);color:var(--ink);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.2s;cursor:pointer;background:none}
-.btn-dark:hover{background:var(--ink);color:var(--parch)}
-.btn-plum{display:inline-block;padding:14px 36px;border:1px solid var(--plum);background:var(--plum);color:#FAF7F2;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.2s;cursor:pointer}
-.btn-plum:hover{background:#2a1a2e}
-.eyebrow-line{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}
-.eyebrow-line::before,.eyebrow-line::after{content:'';width:28px;height:1px;background:var(--gold);opacity:0.5}
-.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden;background:var(--plum)}
-.hero-texture{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(168,130,42,0.18) 0%,transparent 55%),radial-gradient(ellipse at 85% 30%,rgba(74,98,72,0.2) 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(60,40,64,0.5) 0%,transparent 60%)}
-.hero-eyebrow{font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:28px;position:relative;display:flex;align-items:center;gap:16px}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold2);opacity:0.4}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,110px);font-weight:300;color:#FAF7F2;line-height:0.9;letter-spacing:-0.02em;position:relative;margin-bottom:16px}
-.hero-title em{font-style:italic;color:var(--gold2)}
-.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);font-style:italic;color:rgba(250,247,242,0.6);position:relative;margin-bottom:40px;font-weight:300;letter-spacing:0.04em}
-.hero-motto{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(250,247,242,0.35);position:relative;margin-bottom:52px}
-.intro{max-width:640px;margin:0 auto;padding:96px 40px;text-align:center}
-.intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;line-height:1.2;color:var(--plum);margin-bottom:28px}
-.intro h2 em{font-style:italic;color:var(--terra)}
-.intro p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:14px}
-.divider{width:40px;height:1px;background:var(--border);margin:36px auto}
-.philosophy{background:var(--parch2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 40px}
-.philosophy-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;text-align:center}
-.phil-item h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--plum);margin-bottom:10px}
-.phil-item-rule{width:24px;height:1px;background:var(--gold);margin:0 auto 16px;opacity:0.6}
-.phil-item p{font-size:13px;color:var(--muted);line-height:1.9}
-.teas-preview{padding:96px 0 0;max-width:1200px;margin:0 auto}
-.teas-preview-header{text-align:center;padding:0 40px;margin-bottom:64px}
-.teas-preview-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,54px);font-weight:400;color:var(--plum);line-height:1.1;margin-bottom:14px}
-.teas-preview-header h2 em{font-style:italic;color:var(--terra)}
-.teas-preview-header p{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.9}
-.editorial-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-left:1px solid var(--border)}
-.editorial-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:background 0.3s;background:var(--parch)}
-.editorial-card:hover{background:#fff}
-.editorial-img-wrap{width:100%;aspect-ratio:1;background:#F8F5EF;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:16px}
-.editorial-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform 0.5s ease}
-.editorial-card:hover .editorial-img-wrap img{transform:scale(1.04)}
-.editorial-accent{height:3px}
-.e-scarlet{background:#7A2020}.e-rising{background:#4A6248}.e-golden{background:#A8822A}.e-quiet{background:#3C2840}
-.editorial-body{padding:22px 22px 26px;flex:1;display:flex;flex-direction:column}
-.editorial-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;line-height:1.1;margin-bottom:5px}
-.e-scarlet-text{color:#7A2020!important}.e-rising-text{color:#4A6248!important}.e-golden-text{color:#8A6820!important}.e-quiet-text{color:#3C2840!important}
-.editorial-phase{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-.editorial-desc{font-size:12px;color:var(--muted);line-height:1.8;flex:1;margin-bottom:16px}
-.editorial-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:12px;margin-top:auto}
-.editorial-price{font-size:13px;font-weight:500;color:var(--ink)}
-.editorial-shop-link{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);cursor:pointer}
-.teas-cta{text-align:center;padding:56px 40px 96px}
-.bundle{background:var(--plum);padding:96px 40px;text-align:center;color:#FAF7F2}
-.bundle-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0.8}
-.bundle-eyebrow::before,.bundle-eyebrow::after{content:'';width:28px;height:1px;background:var(--gold2);opacity:0.4}
-.bundle h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:#FAF7F2;margin-bottom:12px;font-style:italic}
-.bundle-sub{font-size:14px;color:rgba(250,247,242,0.5);max-width:420px;margin:0 auto 36px;line-height:1.9}
-.bundle-price{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--gold2);margin-bottom:8px}
-.bundle-detail{font-size:11px;color:rgba(250,247,242,0.3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:40px}
-.founder{max-width:860px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:240px 1fr;gap:72px;align-items:start}
-.founder-mark{width:72px;height:72px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--gold);margin-bottom:22px}
-.founder-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
-.founder-name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;color:var(--plum);line-height:1}
-.founder-title{font-size:12px;color:var(--muted);margin-top:5px}
-.founder-body p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:16px}
-.pull-quote{font-family:'Cormorant Garamond',serif;font-size:23px;font-style:italic;color:var(--plum);border-left:1px solid var(--gold);padding-left:22px;margin:28px 0;line-height:1.5}
-.vision{background:var(--parch2);border-top:1px solid var(--border);padding:80px 40px;text-align:center}
-.vision-inner{max-width:640px;margin:0 auto}
-.vision h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--plum);line-height:1.25;margin-bottom:22px}
-.vision h2 em{font-style:italic;color:var(--terra)}
-.vision p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:14px}
-.vision-values{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px}
-.value-pill{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:9px 18px}
-.footer-banner{background:var(--parch3);border-top:1px solid var(--border);padding:80px 40px;text-align:center}
-.footer-banner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,52px);font-weight:300;font-style:italic;color:var(--plum);margin-bottom:12px}
-.footer-banner h2 span{color:var(--gold)}
-.footer-banner p{font-size:14px;color:var(--muted);max-width:380px;margin:0 auto 36px;line-height:1.9}
-footer{background:var(--plum);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}
-.footer-brand{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:500;color:#FAF7F2}
-.footer-brand em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold2);font-size:24px}
-.footer-tagline{font-size:11px;color:rgba(250,247,242,0.3);letter-spacing:0.15em;text-transform:uppercase;margin-top:4px}
-.footer-copy{font-size:11px;color:rgba(250,247,242,0.22)}
-.shop-hero{background:var(--parch2);border-bottom:1px solid var(--border);padding:64px 48px 56px;text-align:center}
-.shop-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,68px);font-weight:400;color:var(--plum);line-height:1;margin-bottom:12px}
-.shop-hero h1 em{font-style:italic;color:var(--terra)}
-.shop-hero p{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.9}
-.shop-body{max-width:1100px;margin:0 auto;padding:72px 40px}
-.shop-section-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:14px}
-.shop-section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.featured-product{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);margin-bottom:72px;background:#fff}
-.featured-img{background:#F8F5EF;display:flex;align-items:center;justify-content:center;padding:40px;min-height:400px;position:relative}
-.featured-img-badge{position:absolute;top:20px;right:20px;background:var(--gold);color:#fff;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px}
-.featured-art-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.featured-art-grid img{width:100%;aspect-ratio:1;object-fit:contain;background:#F8F5EF;border:1px solid var(--border)}
-.featured-content{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
-.featured-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.featured-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:var(--plum);line-height:1.05;margin-bottom:8px}
-.featured-title em{font-style:italic}
-.featured-sub{font-size:13px;color:var(--faint);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:24px}
-.featured-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:28px}
-.featured-includes{margin-bottom:32px}
-.featured-includes-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
-.include-item{font-size:13px;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
-.include-item:last-child{border-bottom:none}
-.featured-pricing{display:flex;align-items:baseline;gap:14px;margin-bottom:28px}
-.featured-price{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--ink)}
-.featured-saving{font-size:12px;color:var(--sage);border:1px solid currentColor;padding:3px 10px;letter-spacing:0.06em}
-.tins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:72px}
-.tin-card{background:var(--parch);display:flex;flex-direction:column;overflow:hidden;transition:background 0.2s;cursor:pointer}
-.tin-card:hover{background:#fff}
-.tin-img-wrap{width:100%;aspect-ratio:1;background:#F8F5EF;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
-.tin-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform 0.4s ease}
-.tin-card:hover .tin-img-wrap img{transform:scale(1.05)}
-.tin-accent-bar{height:2px;width:100%}
-.t-scarlet .tin-accent-bar{background:#7A2020}
-.t-rising .tin-accent-bar{background:#4A6248}
-.t-golden .tin-accent-bar{background:#A8822A}
-.t-quiet .tin-accent-bar{background:#3C2840}
-.tin-body{padding:22px 22px 0;flex:1}
-.tin-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:4px}
-.t-scarlet .tin-name{color:#7A2020}.t-rising .tin-name{color:#4A6248}.t-golden .tin-name{color:#8A6820}.t-quiet .tin-name{color:#3C2840}
-.tin-phase{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-.tin-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}
-.tin-herbs{font-size:11px;color:var(--faint);font-style:italic;line-height:1.6;margin-bottom:18px}
-.tin-footer{padding:12px 22px 22px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);margin:0 22px}
-.tin-price{font-size:14px;font-weight:500;color:var(--ink)}
-.tin-add{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);cursor:pointer}
-.coming-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
-.coming-card{background:var(--parch2);padding:40px 36px;display:flex;align-items:center;gap:32px}
-.coming-placeholder{width:90px;height:90px;flex-shrink:0;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:var(--faint);text-align:center}
-.coming-badge{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);border:1px solid var(--border);padding:4px 10px;display:inline-block;margin-bottom:12px}
-.coming-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--plum);margin-bottom:6px}
-.coming-desc{font-size:12px;color:var(--muted);line-height:1.8}
-.notify-bar{background:var(--plum);padding:48px 40px;text-align:center;margin-top:1px}
-.notify-bar p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(250,247,242,0.6);margin-bottom:20px}
-.notify-form{display:flex;max-width:380px;margin:0 auto}
-.notify-form input{flex:1;padding:12px 16px;border:1px solid rgba(250,247,242,0.2);background:rgba(250,247,242,0.05);color:#FAF7F2;font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
-.notify-form input::placeholder{color:rgba(250,247,242,0.3)}
-.notify-form button{padding:12px 24px;background:var(--gold);border:none;color:#fff;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif}
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    body {background-color: #f9f5ef}
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Helvetica Neue'; color: #977020; -webkit-text-stroke: #977020; background-color: #f9f5ef}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 26.0px 'Helvetica Neue'; color: #977020; -webkit-text-stroke: #977020; background-color: #f9f5ef; min-height: 30.0px}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-brand" onclick="showPage('home')"><em>Luna</em> Jing</div>
-  <div class="nav-links">
-    <a onclick="showPage('shop')" id="nav-teas">Our teas</a>
-    <a onclick="showPage('home')">Learn</a>
-    <a onclick="showPage('home')">About</a>
-  </div>
-  <button class="nav-cta" onclick="showPage('shop')">Shop now</button>
-</nav>
-
-<!-- HOME -->
-<div class="page active" id="page-home">
-  <section class="hero">
-    <div class="hero-texture"></div>
-    <div class="hero-eyebrow">Rooted in ancient wisdom</div>
-    <h1 class="hero-title"><em>Luna</em><br>Jing</h1>
-    <p class="hero-tagline">Cycle-synced herbal teas rooted in Traditional Chinese Medicine</p>
-    <p class="hero-motto">Live in rhythm.</p>
-    <button class="btn-ghost" onclick="showPage('shop')">Discover your phase</button>
-  </section>
-
-  <section class="intro">
-    <div class="eyebrow-line">The heart of Luna Jing</div>
-    <h2>Your body was never meant to be <em>a mystery</em></h2>
-    <p>For thousands of years, women observed nature's rhythms and recognized those same rhythms within themselves. Their menstrual cycles were not inconveniences to suppress — they were seasons to understand, honor, and work alongside.</p>
-    <p>Modern life often asks women to perform the same every day, regardless of where they are in their cycle.</p>
-    <div class="divider"></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--plum);line-height:1.7">Luna Jing offers another way.<br>One season. One phase. One cup at a time.</p>
-  </section>
-
-  <section class="philosophy">
-    <div class="philosophy-inner">
-      <div class="phil-item"><h3>Wisdom</h3><div class="phil-item-rule"></div><p>We honor thousands of years of Traditional Chinese Medicine while embracing thoughtful, evidence-informed learning.</p></div>
-      <div class="phil-item"><h3>Education</h3><div class="phil-item-rule"></div><p>We don't simply sell products. We teach women why — so they can build a lasting relationship with their own bodies.</p></div>
-      <div class="phil-item"><h3>Rhythm</h3><div class="phil-item-rule"></div><p>Nature already understands balance. Our bodies do too. Luna Jing is a lifelong invitation to live in rhythm.</p></div>
-    </div>
-  </section>
-
-  <section class="teas-preview">
-    <div class="teas-preview-header">
-      <div class="eyebrow-line">The collection</div>
-      <h2>Four teas.<br><em>One complete cycle.</em></h2>
-      <p>Each blend is formulated for a different phase of the menstrual cycle — beautifully crafted, deeply educational, and rooted in TCM.</p>
-    </div>
-    <div class="editorial-grid">
-      <div class="editorial-card" onclick="showPage('shop')">
-        <div class="editorial-accent e-scarlet"></div>
-        <div class="editorial-img-wrap"><img src="images/scarlet.jpeg" alt="Scarlet Rest"></div>
-        <div class="editorial-body">
-          <h3 class="editorial-name e-scarlet-text">Scarlet Rest</h3>
-          <div class="editorial-phase">Menstrual · Days 1–5</div>
-          <p class="editorial-desc">Your body is working hardest. This warming, iron-rich blend replenishes what is lost and eases the heaviness of the first days.</p>
-          <div class="editorial-bottom"><span class="editorial-price">$20</span><span class="editorial-shop-link">Shop →</span></div>
-        </div>
-      </div>
-      <div class="editorial-card" onclick="showPage('shop')">
-        <div class="editorial-accent e-rising"></div>
-        <div class="editorial-img-wrap"><img src="images/rising.jpeg" alt="Rising Green"></div>
-        <div class="editorial-body">
-          <h3 class="editorial-name e-rising-text">Rising Green</h3>
-          <div class="editorial-phase">Follicular · Days 6–13</div>
-          <p class="editorial-desc">Energy is ascending. This bright, liver-cleansing blend feeds growing momentum with a clean, slightly bitter finish.</p>
-          <div class="editorial-bottom"><span class="editorial-price">$20</span><span class="editorial-shop-link">Shop →</span></div>
-        </div>
-      </div>
-      <div class="editorial-card" onclick="showPage('shop')">
-        <div class="editorial-accent e-golden"></div>
-        <div class="editorial-img-wrap"><img src="images/golden.jpeg" alt="Golden Peak"></div>
-        <div class="editorial-body">
-          <h3 class="editorial-name e-golden-text">Golden Peak</h3>
-          <div class="editorial-phase">Ovulation · Days 14–15</div>
-          <p class="editorial-desc">Your most radiant days deserve your most radiant blend. Antioxidant-rich, bright and floral — a tea that feels like sunlight.</p>
-          <div class="editorial-bottom"><span class="editorial-price">$20</span><span class="editorial-shop-link">Shop →</span></div>
-        </div>
-      </div>
-      <div class="editorial-card" onclick="showPage('shop')">
-        <div class="editorial-accent e-quiet"></div>
-        <div class="editorial-img-wrap"><img src="images/quiet.jpeg" alt="Quiet Moon"></div>
-        <div class="editorial-body">
-          <h3 class="editorial-name e-quiet-text">Quiet Moon</h3>
-          <div class="editorial-phase">Luteal · Days 16–28</div>
-          <p class="editorial-desc">The most needed blend. Deeply calming nervines to hold you through the hardest phase of your cycle with grace.</p>
-          <div class="editorial-bottom"><span class="editorial-price">$20</span><span class="editorial-shop-link">Shop →</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="teas-cta"><button class="btn-dark" onclick="showPage('shop')">Shop all teas</button></div>
-  </section>
-
-  <section class="bundle">
-    <div class="bundle-eyebrow">Our most beloved offering</div>
-    <h2>The Full Cycle Set</h2>
-    <p class="bundle-sub">All four phase tins in a keepsake gift box, with a printed cycle guide card and brewing ritual. For yourself — or the woman in your life who deserves to be understood.</p>
-    <div class="bundle-price">$70</div>
-    <div class="bundle-detail">Four tins · Cycle guide · Keepsake gift box</div>
-    <button class="btn-ghost" onclick="showPage('shop')">Shop the set</button>
-  </section>
-
-  <section class="founder">
-    <div>
-      <div class="founder-mark">A</div>
-      <div class="founder-label">Founder</div>
-      <div class="founder-name">Anna</div>
-      <div class="founder-title">Minneapolis, Minnesota</div>
-    </div>
-    <div class="founder-body">
-      <p>Luna Jing was born from personal curiosity. After years of navigating health challenges and searching for answers, I began exploring holistic wellness, herbal traditions, and Traditional Chinese Medicine.</p>
-      <div class="pull-quote">"Chinese medicine is rooted in ancient traditions and holistic principles that view the body, mind, heart, and spirit as interconnected."</div>
-      <p>Luna Jing became the answer. This company is not built on the idea that I know everything — it is built on a commitment to lifelong learning. As Luna Jing grows, I plan to pursue formal education and certification in TCM so this brand continues to evolve with integrity, humility, and deep respect for one of the world's oldest healing systems.</p>
-    </div>
-  </section>
-
-  <section class="vision">
-    <div class="vision-inner">
-      <div class="eyebrow-line">Our vision</div>
-      <h2>A future where women understand their bodies as naturally as they understand <em>the changing seasons</em></h2>
-      <p>Where periods are discussed without shame. Where hormonal changes are expected instead of feared. Where wellness is rooted in education instead of confusion.</p>
-      <div class="vision-values">
-        <span class="value-pill">Wisdom</span><span class="value-pill">Education</span>
-        <span class="value-pill">Beauty</span><span class="value-pill">Integrity</span><span class="value-pill">Rhythm</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="footer-banner">
-    <h2>Welcome to <span>Luna Jing</span></h2>
-    <p>Your body was never meant to be a mystery. It was meant to be understood. Welcome home.</p>
-    <button class="btn-dark" onclick="showPage('shop')">Begin your ritual</button>
-  </section>
-
-  <footer>
-    <div><div class="footer-brand"><em>Luna</em> Jing</div><div class="footer-tagline">Brew with your cycle.</div></div>
-    <div class="footer-copy">© 2025 Luna Jing · Minneapolis, MN</div>
-  </footer>
-</div>
-
-<!-- SHOP -->
-<div class="page" id="page-shop">
-  <div class="shop-hero">
-    <div class="eyebrow-line">The collection</div>
-    <h1>Our <em>Teas</em></h1>
-    <p>Six products crafted for every phase of your cycle. Formulated in Traditional Chinese Medicine, designed for the modern woman.</p>
-  </div>
-  <div class="shop-body">
-    <div class="shop-section-label">Our signature offering</div>
-    <div class="featured-product">
-      <div class="featured-img">
-        <div class="featured-img-badge">Best seller</div>
-        <div class="featured-art-grid">
-          <img src="images/scarlet.jpeg" alt="Scarlet Rest">
-          <img src="images/rising.jpeg" alt="Rising Green">
-          <img src="images/golden.jpeg" alt="Golden Peak">
-          <img src="images/quiet.jpeg" alt="Quiet Moon">
-        </div>
-      </div>
-      <div class="featured-content">
-        <div class="featured-eyebrow">The Luna Jing signature set</div>
-        <h2 class="featured-title">The Full<br><em>Cycle Set</em></h2>
-        <div class="featured-sub">All four phases · Complete ritual</div>
-        <p class="featured-desc">One tin for each phase of your cycle, nestled in a keepsake gift box with a printed cycle guide card. The most complete introduction to living in rhythm with your body.</p>
-        <div class="featured-includes">
-          <div class="featured-includes-label">What's inside</div>
-          <div class="include-item"><span>Scarlet Rest</span><span style="color:var(--faint);font-size:11px">Menstrual · 2 oz</span></div>
-          <div class="include-item"><span>Rising Green</span><span style="color:var(--faint);font-size:11px">Follicular · 2 oz</span></div>
-          <div class="include-item"><span>Golden Peak</span><span style="color:var(--faint);font-size:11px">Ovulation · 2 oz</span></div>
-          <div class="include-item"><span>Quiet Moon</span><span style="color:var(--faint);font-size:11px">Luteal · 2 oz</span></div>
-          <div class="include-item"><span>Printed cycle guide card</span><span style="color:var(--faint);font-size:11px">Included</span></div>
-          <div class="include-item"><span>Keepsake gift box</span><span style="color:var(--faint);font-size:11px">Included</span></div>
-        </div>
-        <div class="featured-pricing">
-          <span class="featured-price">$70</span>
-          <span class="featured-saving">Save $10 vs. individual</span>
-        </div>
-        <button class="btn-plum">Add to cart</button>
-      </div>
-    </div>
-
-    <div class="shop-section-label">Individual tins</div>
-    <div class="tins-grid">
-      <div class="tin-card t-scarlet">
-        <div class="tin-img-wrap"><img src="images/scarlet.jpeg" alt="Scarlet Rest"></div>
-        <div class="tin-accent-bar"></div>
-        <div class="tin-body">
-          <h3 class="tin-name">Scarlet Rest</h3>
-          <div class="tin-phase">Menstrual · Days 1–5</div>
-          <p class="tin-desc">Iron-replenishing and deeply warming. A ritual for your body's hardest-working days.</p>
-          <p class="tin-herbs">Red Raspberry Leaf · Nettle · Ginger · Rose Petals · Chamomile · Cinnamon</p>
-        </div>
-        <div class="tin-footer"><span class="tin-price">$20</span><span class="tin-add">Add to cart →</span></div>
-      </div>
-      <div class="tin-card t-rising">
-        <div class="tin-img-wrap"><img src="images/rising.jpeg" alt="Rising Green"></div>
-        <div class="tin-accent-bar"></div>
-        <div class="tin-body">
-          <h3 class="tin-name">Rising Green</h3>
-          <div class="tin-phase">Follicular · Days 6–13</div>
-          <p class="tin-desc">Bright, liver-cleansing, and energizing. Feeds your ascending momentum with a clean finish.</p>
-          <p class="tin-herbs">Tulsi · Chrysanthemum · Dandelion Root · Goji Berry · Nettle · Lemon Verbena</p>
-        </div>
-        <div class="tin-footer"><span class="tin-price">$20</span><span class="tin-add">Add to cart →</span></div>
-      </div>
-      <div class="tin-card t-golden">
-        <div class="tin-img-wrap"><img src="images/golden.jpeg" alt="Golden Peak"></div>
-        <div class="tin-accent-bar"></div>
-        <div class="tin-body">
-          <h3 class="tin-name">Golden Peak</h3>
-          <div class="tin-phase">Ovulation · Days 14–15</div>
-          <p class="tin-desc">Antioxidant-rich and radiant. A celebration blend for your most expansive days.</p>
-          <p class="tin-herbs">Rose Hips · Hibiscus · Goji Berry · Tulsi · Calendula · Lemon Peel</p>
-        </div>
-        <div class="tin-footer"><span class="tin-price">$20</span><span class="tin-add">Add to cart →</span></div>
-      </div>
-      <div class="tin-card t-quiet">
-        <div class="tin-img-wrap"><img src="images/quiet.jpeg" alt="Quiet Moon"></div>
-        <div class="tin-accent-bar"></div>
-        <div class="tin-body">
-          <h3 class="tin-name">Quiet Moon</h3>
-          <div class="tin-phase">Luteal · Days 16–28</div>
-          <p class="tin-desc">Deeply calming nervines. Reach for this when everything feels like too much.</p>
-          <p class="tin-herbs">Lemon Balm · Skullcap · Oatstraw · Rose Petals · Passionflower · Lavender</p>
-        </div>
-        <div class="tin-footer"><span class="tin-price">$20</span><span class="tin-add">Add to cart →</span></div>
-      </div>
-    </div>
-
-    <div class="shop-section-label" style="margin-top:72px">Coming soon</div>
-    <div class="coming-grid">
-      <div class="coming-card">
-        <div class="coming-placeholder">Art<br>coming<br>soon</div>
-        <div>
-          <div class="coming-badge">Coming soon</div>
-          <h3 class="coming-name">Bloom Blend</h3>
-          <p class="coming-desc">A pregnancy support blend formulated to nourish, calm, and sustain — gentle, grounding, and deeply intentional.</p>
-        </div>
-      </div>
-      <div class="coming-card">
-        <div class="coming-placeholder">Art<br>coming<br>soon</div>
-        <div>
-          <div class="coming-badge">Coming soon</div>
-          <h3 class="coming-name">Golden Root</h3>
-          <p class="coming-desc">A postpartum restoration blend to replenish and rebuild. Because the woman who just grew a life deserves to be held too.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="notify-bar">
-      <p>Be the first to know when Bloom Blend & Golden Root arrive.</p>
-      <div class="notify-form">
-        <input type="email" placeholder="your@email.com">
-        <button>Notify me</button>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <div><div class="footer-brand"><em>Luna</em> Jing</div><div class="footer-tagline">Brew with your cycle.</div></div>
-    <div class="footer-copy">© 2025 Luna Jing · Minneapolis, MN</div>
-  </footer>
-</div>
-
-<script>
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  if(id==='shop') document.getElementById('nav-teas').classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-</script>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;title&gt;Luna Jing — Brew With Your Cycle&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">&lt;link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p1"><span class="s1">*{box-sizing:border-box;margin:0;padding:0}</span></p>
+<p class="p1"><span class="s1">:root{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--ink:#1C1710;--muted:#7A6A54;--faint:#B8A898;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--parch:#FAF7F2;--parch2:#F2EDE3;--parch3:#E8E0D0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--gold:#A8822A;--gold2:#C8A84A;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--sage:#4A6248;--plum:#3C2840;--terra:#7A3E1E;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>--border:#DDD4C0;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">body{font-family:'DM Sans',sans-serif;background:var(--parch);color:var(--ink);line-height:1.6;font-size:15px}</span></p>
+<p class="p1"><span class="s1">nav{display:flex;justify-content:space-between;align-items:center;padding:22px 48px;border-bottom:1px solid var(--border);background:var(--parch);position:sticky;top:0;z-index:100}</span></p>
+<p class="p1"><span class="s1">.nav-brand{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-0.01em;cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.nav-brand em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:26px}</span></p>
+<p class="p1"><span class="s1">.nav-links{display:flex;gap:32px}</span></p>
+<p class="p1"><span class="s1">.nav-links a{text-decoration:none;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.nav-links a:hover,.nav-links a.active{color:var(--ink)}</span></p>
+<p class="p1"><span class="s1">.nav-cta{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--ink);padding:9px 20px;color:var(--ink);transition:all 0.2s;cursor:pointer;background:none}</span></p>
+<p class="p1"><span class="s1">.nav-cta:hover{background:var(--ink);color:var(--parch)}</span></p>
+<p class="p1"><span class="s1">.page{display:none}.page.active{display:block}</span></p>
+<p class="p1"><span class="s1">.btn-ghost{display:inline-block;padding:14px 36px;border:1px solid rgba(200,168,74,0.5);color:#FAF7F2;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;cursor:pointer;background:none}</span></p>
+<p class="p1"><span class="s1">.btn-ghost:hover{background:rgba(200,168,74,0.12);border-color:var(--gold2)}</span></p>
+<p class="p1"><span class="s1">.btn-dark{display:inline-block;padding:14px 36px;border:1px solid var(--ink);color:var(--ink);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.2s;cursor:pointer;background:none}</span></p>
+<p class="p1"><span class="s1">.btn-dark:hover{background:var(--ink);color:var(--parch)}</span></p>
+<p class="p1"><span class="s1">.btn-plum{display:inline-block;padding:14px 36px;border:1px solid var(--plum);background:var(--plum);color:#FAF7F2;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.2s;cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.btn-plum:hover{background:#2a1a2e}</span></p>
+<p class="p1"><span class="s1">.eyebrow-line{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px}</span></p>
+<p class="p1"><span class="s1">.eyebrow-line::before,.eyebrow-line::after{content:'';width:28px;height:1px;background:var(--gold);opacity:0.5}</span></p>
+<p class="p1"><span class="s1">.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 40px;position:relative;overflow:hidden;background:var(--plum)}</span></p>
+<p class="p1"><span class="s1">.hero-texture{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(168,130,42,0.18) 0%,transparent 55%),radial-gradient(ellipse at 85% 30%,rgba(74,98,72,0.2) 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,rgba(60,40,64,0.5) 0%,transparent 60%)}</span></p>
+<p class="p1"><span class="s1">.hero-eyebrow{font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold2);margin-bottom:28px;position:relative;display:flex;align-items:center;gap:16px}</span></p>
+<p class="p1"><span class="s1">.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold2);opacity:0.4}</span></p>
+<p class="p1"><span class="s1">.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,110px);font-weight:300;color:#FAF7F2;line-height:0.9;letter-spacing:-0.02em;position:relative;margin-bottom:16px}</span></p>
+<p class="p1"><span class="s1">.hero-title em{font-style:italic;color:var(--gold2)}</span></p>
+<p class="p1"><span class="s1">.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);font-style:italic;color:rgba(250,247,242,0.6);position:relative;margin-bottom:40px;font-weight:300;letter-spacing:0.04em}</span></p>
+<p class="p1"><span class="s1">.hero-motto{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(250,247,242,0.35);position:relative;margin-bottom:52px}</span></p>
+<p class="p1"><span class="s1">.intro{max-width:640px;margin:0 auto;padding:96px 40px;text-align:center}</span></p>
+<p class="p1"><span class="s1">.intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;line-height:1.2;color:var(--plum);margin-bottom:28px}</span></p>
+<p class="p1"><span class="s1">.intro h2 em{font-style:italic;color:var(--terra)}</span></p>
+<p class="p1"><span class="s1">.intro p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:14px}</span></p>
+<p class="p1"><span class="s1">.divider{width:40px;height:1px;background:var(--border);margin:36px auto}</span></p>
+<p class="p1"><span class="s1">.philosophy{background:var(--parch2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 40px}</span></p>
+<p class="p1"><span class="s1">.philosophy-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;text-align:center}</span></p>
+<p class="p1"><span class="s1">.phil-item h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--plum);margin-bottom:10px}</span></p>
+<p class="p1"><span class="s1">.phil-item-rule{width:24px;height:1px;background:var(--gold);margin:0 auto 16px;opacity:0.6}</span></p>
+<p class="p1"><span class="s1">.phil-item p{font-size:13px;color:var(--muted);line-height:1.9}</span></p>
+<p class="p1"><span class="s1">.teas-preview{padding:96px 0 0;max-width:1200px;margin:0 auto}</span></p>
+<p class="p1"><span class="s1">.teas-preview-header{text-align:center;padding:0 40px;margin-bottom:64px}</span></p>
+<p class="p1"><span class="s1">.teas-preview-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,54px);font-weight:400;color:var(--plum);line-height:1.1;margin-bottom:14px}</span></p>
+<p class="p1"><span class="s1">.teas-preview-header h2 em{font-style:italic;color:var(--terra)}</span></p>
+<p class="p1"><span class="s1">.teas-preview-header p{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.9}</span></p>
+<p class="p1"><span class="s1">.editorial-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-left:1px solid var(--border)}</span></p>
+<p class="p1"><span class="s1">.editorial-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:background 0.3s;background:var(--parch)}</span></p>
+<p class="p1"><span class="s1">.editorial-card:hover{background:#fff}</span></p>
+<p class="p1"><span class="s1">.editorial-img-wrap{width:100%;aspect-ratio:1;background:#F8F5EF;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:16px}</span></p>
+<p class="p1"><span class="s1">.editorial-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform 0.5s ease}</span></p>
+<p class="p1"><span class="s1">.editorial-card:hover .editorial-img-wrap img{transform:scale(1.04)}</span></p>
+<p class="p1"><span class="s1">.editorial-accent{height:3px}</span></p>
+<p class="p1"><span class="s1">.e-scarlet{background:#7A2020}.e-rising{background:#4A6248}.e-golden{background:#A8822A}.e-quiet{background:#3C2840}</span></p>
+<p class="p1"><span class="s1">.editorial-body{padding:22px 22px 26px;flex:1;display:flex;flex-direction:column}</span></p>
+<p class="p1"><span class="s1">.editorial-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;line-height:1.1;margin-bottom:5px}</span></p>
+<p class="p1"><span class="s1">.e-scarlet-text{color:#7A2020!important}.e-rising-text{color:#4A6248!important}.e-golden-text{color:#8A6820!important}.e-quiet-text{color:#3C2840!important}</span></p>
+<p class="p1"><span class="s1">.editorial-phase{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}</span></p>
+<p class="p1"><span class="s1">.editorial-desc{font-size:12px;color:var(--muted);line-height:1.8;flex:1;margin-bottom:16px}</span></p>
+<p class="p1"><span class="s1">.editorial-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:12px;margin-top:auto}</span></p>
+<p class="p1"><span class="s1">.editorial-price{font-size:13px;font-weight:500;color:var(--ink)}</span></p>
+<p class="p1"><span class="s1">.editorial-shop-link{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.teas-cta{text-align:center;padding:56px 40px 96px}</span></p>
+<p class="p1"><span class="s1">.bundle{background:var(--plum);padding:96px 40px;text-align:center;color:#FAF7F2}</span></p>
+<p class="p1"><span class="s1">.bundle-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;opacity:0.8}</span></p>
+<p class="p1"><span class="s1">.bundle-eyebrow::before,.bundle-eyebrow::after{content:'';width:28px;height:1px;background:var(--gold2);opacity:0.4}</span></p>
+<p class="p1"><span class="s1">.bundle h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:#FAF7F2;margin-bottom:12px;font-style:italic}</span></p>
+<p class="p1"><span class="s1">.bundle-sub{font-size:14px;color:rgba(250,247,242,0.5);max-width:420px;margin:0 auto 36px;line-height:1.9}</span></p>
+<p class="p1"><span class="s1">.bundle-price{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--gold2);margin-bottom:8px}</span></p>
+<p class="p1"><span class="s1">.bundle-detail{font-size:11px;color:rgba(250,247,242,0.3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:40px}</span></p>
+<p class="p1"><span class="s1">.founder{max-width:860px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:240px 1fr;gap:72px;align-items:start}</span></p>
+<p class="p1"><span class="s1">.founder-mark{width:72px;height:72px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--gold);margin-bottom:22px}</span></p>
+<p class="p1"><span class="s1">.founder-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}</span></p>
+<p class="p1"><span class="s1">.founder-name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;color:var(--plum);line-height:1}</span></p>
+<p class="p1"><span class="s1">.founder-title{font-size:12px;color:var(--muted);margin-top:5px}</span></p>
+<p class="p1"><span class="s1">.founder-body p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:16px}</span></p>
+<p class="p1"><span class="s1">.pull-quote{font-family:'Cormorant Garamond',serif;font-size:23px;font-style:italic;color:var(--plum);border-left:1px solid var(--gold);padding-left:22px;margin:28px 0;line-height:1.5}</span></p>
+<p class="p1"><span class="s1">.vision{background:var(--parch2);border-top:1px solid var(--border);padding:80px 40px;text-align:center}</span></p>
+<p class="p1"><span class="s1">.vision-inner{max-width:640px;margin:0 auto}</span></p>
+<p class="p1"><span class="s1">.vision h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--plum);line-height:1.25;margin-bottom:22px}</span></p>
+<p class="p1"><span class="s1">.vision h2 em{font-style:italic;color:var(--terra)}</span></p>
+<p class="p1"><span class="s1">.vision p{font-size:15px;color:var(--muted);line-height:1.9;margin-bottom:14px}</span></p>
+<p class="p1"><span class="s1">.vision-values{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px}</span></p>
+<p class="p1"><span class="s1">.value-pill{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:9px 18px}</span></p>
+<p class="p1"><span class="s1">.footer-banner{background:var(--parch3);border-top:1px solid var(--border);padding:80px 40px;text-align:center}</span></p>
+<p class="p1"><span class="s1">.footer-banner h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.5vw,52px);font-weight:300;font-style:italic;color:var(--plum);margin-bottom:12px}</span></p>
+<p class="p1"><span class="s1">.footer-banner h2 span{color:var(--gold)}</span></p>
+<p class="p1"><span class="s1">.footer-banner p{font-size:14px;color:var(--muted);max-width:380px;margin:0 auto 36px;line-height:1.9}</span></p>
+<p class="p1"><span class="s1">footer{background:var(--plum);padding:40px 48px;display:flex;justify-content:space-between;align-items:center}</span></p>
+<p class="p1"><span class="s1">.footer-brand{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:500;color:#FAF7F2}</span></p>
+<p class="p1"><span class="s1">.footer-brand em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold2);font-size:24px}</span></p>
+<p class="p1"><span class="s1">.footer-tagline{font-size:11px;color:rgba(250,247,242,0.3);letter-spacing:0.15em;text-transform:uppercase;margin-top:4px}</span></p>
+<p class="p1"><span class="s1">.footer-copy{font-size:11px;color:rgba(250,247,242,0.22)}</span></p>
+<p class="p1"><span class="s1">.shop-hero{background:var(--parch2);border-bottom:1px solid var(--border);padding:64px 48px 56px;text-align:center}</span></p>
+<p class="p1"><span class="s1">.shop-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,68px);font-weight:400;color:var(--plum);line-height:1;margin-bottom:12px}</span></p>
+<p class="p1"><span class="s1">.shop-hero h1 em{font-style:italic;color:var(--terra)}</span></p>
+<p class="p1"><span class="s1">.shop-hero p{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.9}</span></p>
+<p class="p1"><span class="s1">.shop-body{max-width:1100px;margin:0 auto;padding:72px 40px}</span></p>
+<p class="p1"><span class="s1">.shop-section-label{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:14px}</span></p>
+<p class="p1"><span class="s1">.shop-section-label::after{content:'';flex:1;height:1px;background:var(--border)}</span></p>
+<p class="p1"><span class="s1">.featured-product{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);margin-bottom:72px;background:#fff}</span></p>
+<p class="p1"><span class="s1">.featured-img{background:#F8F5EF;display:flex;align-items:center;justify-content:center;padding:40px;min-height:400px;position:relative}</span></p>
+<p class="p1"><span class="s1">.featured-img-badge{position:absolute;top:20px;right:20px;background:var(--gold);color:#fff;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:6px 14px}</span></p>
+<p class="p1"><span class="s1">.featured-art-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}</span></p>
+<p class="p1"><span class="s1">.featured-art-grid img{width:100%;aspect-ratio:1;object-fit:contain;background:#F8F5EF;border:1px solid var(--border)}</span></p>
+<p class="p1"><span class="s1">.featured-content{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}</span></p>
+<p class="p1"><span class="s1">.featured-eyebrow{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}</span></p>
+<p class="p1"><span class="s1">.featured-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:var(--plum);line-height:1.05;margin-bottom:8px}</span></p>
+<p class="p1"><span class="s1">.featured-title em{font-style:italic}</span></p>
+<p class="p1"><span class="s1">.featured-sub{font-size:13px;color:var(--faint);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:24px}</span></p>
+<p class="p1"><span class="s1">.featured-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:28px}</span></p>
+<p class="p1"><span class="s1">.featured-includes{margin-bottom:32px}</span></p>
+<p class="p1"><span class="s1">.featured-includes-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}</span></p>
+<p class="p1"><span class="s1">.include-item{font-size:13px;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}</span></p>
+<p class="p1"><span class="s1">.include-item:last-child{border-bottom:none}</span></p>
+<p class="p1"><span class="s1">.featured-pricing{display:flex;align-items:baseline;gap:14px;margin-bottom:28px}</span></p>
+<p class="p1"><span class="s1">.featured-price{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--ink)}</span></p>
+<p class="p1"><span class="s1">.featured-saving{font-size:12px;color:var(--sage);border:1px solid currentColor;padding:3px 10px;letter-spacing:0.06em}</span></p>
+<p class="p1"><span class="s1">.tins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:72px}</span></p>
+<p class="p1"><span class="s1">.tin-card{background:var(--parch);display:flex;flex-direction:column;overflow:hidden;transition:background 0.2s;cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.tin-card:hover{background:#fff}</span></p>
+<p class="p1"><span class="s1">.tin-img-wrap{width:100%;aspect-ratio:1;background:#F8F5EF;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}</span></p>
+<p class="p1"><span class="s1">.tin-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform 0.4s ease}</span></p>
+<p class="p1"><span class="s1">.tin-card:hover .tin-img-wrap img{transform:scale(1.05)}</span></p>
+<p class="p1"><span class="s1">.tin-accent-bar{height:2px;width:100%}</span></p>
+<p class="p1"><span class="s1">.t-scarlet .tin-accent-bar{background:#7A2020}</span></p>
+<p class="p1"><span class="s1">.t-rising .tin-accent-bar{background:#4A6248}</span></p>
+<p class="p1"><span class="s1">.t-golden .tin-accent-bar{background:#A8822A}</span></p>
+<p class="p1"><span class="s1">.t-quiet .tin-accent-bar{background:#3C2840}</span></p>
+<p class="p1"><span class="s1">.tin-body{padding:22px 22px 0;flex:1}</span></p>
+<p class="p1"><span class="s1">.tin-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:4px}</span></p>
+<p class="p1"><span class="s1">.t-scarlet .tin-name{color:#7A2020}.t-rising .tin-name{color:#4A6248}.t-golden .tin-name{color:#8A6820}.t-quiet .tin-name{color:#3C2840}</span></p>
+<p class="p1"><span class="s1">.tin-phase{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}</span></p>
+<p class="p1"><span class="s1">.tin-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}</span></p>
+<p class="p1"><span class="s1">.tin-herbs{font-size:11px;color:var(--faint);font-style:italic;line-height:1.6;margin-bottom:18px}</span></p>
+<p class="p1"><span class="s1">.tin-footer{padding:12px 22px 22px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);margin:0 22px}</span></p>
+<p class="p1"><span class="s1">.tin-price{font-size:14px;font-weight:500;color:var(--ink)}</span></p>
+<p class="p1"><span class="s1">.tin-add{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);cursor:pointer}</span></p>
+<p class="p1"><span class="s1">.coming-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}</span></p>
+<p class="p1"><span class="s1">.coming-card{background:var(--parch2);padding:40px 36px;display:flex;align-items:center;gap:32px}</span></p>
+<p class="p1"><span class="s1">.coming-placeholder{width:90px;height:90px;flex-shrink:0;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;color:var(--faint);text-align:center}</span></p>
+<p class="p1"><span class="s1">.coming-badge{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--faint);border:1px solid var(--border);padding:4px 10px;display:inline-block;margin-bottom:12px}</span></p>
+<p class="p1"><span class="s1">.coming-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--plum);margin-bottom:6px}</span></p>
+<p class="p1"><span class="s1">.coming-desc{font-size:12px;color:var(--muted);line-height:1.8}</span></p>
+<p class="p1"><span class="s1">.notify-bar{background:var(--plum);padding:48px 40px;text-align:center;margin-top:1px}</span></p>
+<p class="p1"><span class="s1">.notify-bar p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(250,247,242,0.6);margin-bottom:20px}</span></p>
+<p class="p1"><span class="s1">.notify-form{display:flex;max-width:380px;margin:0 auto}</span></p>
+<p class="p1"><span class="s1">.notify-form input{flex:1;padding:12px 16px;border:1px solid rgba(250,247,242,0.2);background:rgba(250,247,242,0.05);color:#FAF7F2;font-size:13px;font-family:'DM Sans',sans-serif;outline:none}</span></p>
+<p class="p1"><span class="s1">.notify-form input::placeholder{color:rgba(250,247,242,0.3)}</span></p>
+<p class="p1"><span class="s1">.notify-form button{padding:12px 24px;background:var(--gold);border:none;color:#fff;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif}</span></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;nav&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="nav-brand" onclick="showPage('home')"&gt;&lt;em&gt;Luna&lt;/em&gt; Jing&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="nav-links"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a onclick="showPage('shop')" id="nav-teas"&gt;Our teas&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a onclick="showPage('home')"&gt;Learn&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;a onclick="showPage('home')"&gt;About&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button class="nav-cta" onclick="showPage('shop')"&gt;Shop now&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/nav&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- HOME --&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div class="page active" id="page-home"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="hero"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-texture"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-eyebrow"&gt;Rooted in ancient wisdom&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1 class="hero-title"&gt;&lt;em&gt;Luna&lt;/em&gt;&lt;br&gt;Jing&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="hero-tagline"&gt;Cycle-synced herbal teas rooted in Traditional Chinese Medicine&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="hero-motto"&gt;Live in rhythm.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button class="btn-ghost" onclick="showPage('shop')"&gt;Discover your phase&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="intro"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="eyebrow-line"&gt;The heart of Luna Jing&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Your body was never meant to be &lt;em&gt;a mystery&lt;/em&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p&gt;For thousands of years, women observed nature's rhythms and recognized those same rhythms within themselves. Their menstrual cycles were not inconveniences to suppress — they were seasons to understand, honor, and work alongside.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p&gt;Modern life often asks women to perform the same every day, regardless of where they are in their cycle.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="divider"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--plum);line-height:1.7"&gt;Luna Jing offers another way.&lt;br&gt;One season. One phase. One cup at a time.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="philosophy"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="philosophy-inner"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phil-item"&gt;&lt;h3&gt;Wisdom&lt;/h3&gt;&lt;div class="phil-item-rule"&gt;&lt;/div&gt;&lt;p&gt;We honor thousands of years of Traditional Chinese Medicine while embracing thoughtful, evidence-informed learning.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phil-item"&gt;&lt;h3&gt;Education&lt;/h3&gt;&lt;div class="phil-item-rule"&gt;&lt;/div&gt;&lt;p&gt;We don't simply sell products. We teach women why — so they can build a lasting relationship with their own bodies.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phil-item"&gt;&lt;h3&gt;Rhythm&lt;/h3&gt;&lt;div class="phil-item-rule"&gt;&lt;/div&gt;&lt;p&gt;Nature already understands balance. Our bodies do too. Luna Jing is a lifelong invitation to live in rhythm.&lt;/p&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="teas-preview"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="teas-preview-header"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="eyebrow-line"&gt;The collection&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Four teas.&lt;br&gt;&lt;em&gt;One complete cycle.&lt;/em&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Each blend is formulated for a different phase of the menstrual cycle — beautifully crafted, deeply educational, and rooted in TCM.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="editorial-grid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="editorial-card" onclick="showPage('shop')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-accent e-scarlet"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-img-wrap"&gt;&lt;img src="scarlet.jpeg" alt="Scarlet Rest"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="editorial-name e-scarlet-text"&gt;Scarlet Rest&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-phase"&gt;Menstrual · Days 1–5&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="editorial-desc"&gt;Your body is working hardest. This warming, iron-rich blend replenishes what is lost and eases the heaviness of the first days.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-bottom"&gt;&lt;span class="editorial-price"&gt;$20&lt;/span&gt;&lt;span class="editorial-shop-link"&gt;Shop →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="editorial-card" onclick="showPage('shop')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-accent e-rising"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-img-wrap"&gt;&lt;img src="rising.jpeg" alt="Rising Green"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="editorial-name e-rising-text"&gt;Rising Green&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-phase"&gt;Follicular · Days 6–13&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="editorial-desc"&gt;Energy is ascending. This bright, liver-cleansing blend feeds growing momentum with a clean, slightly bitter finish.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-bottom"&gt;&lt;span class="editorial-price"&gt;$20&lt;/span&gt;&lt;span class="editorial-shop-link"&gt;Shop →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="editorial-card" onclick="showPage('shop')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-accent e-golden"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-img-wrap"&gt;&lt;img src="golden.jpeg" alt="Golden Peak"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="editorial-name e-golden-text"&gt;Golden Peak&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-phase"&gt;Ovulation · Days 14–15&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="editorial-desc"&gt;Your most radiant days deserve your most radiant blend. Antioxidant-rich, bright and floral — a tea that feels like sunlight.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-bottom"&gt;&lt;span class="editorial-price"&gt;$20&lt;/span&gt;&lt;span class="editorial-shop-link"&gt;Shop →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="editorial-card" onclick="showPage('shop')"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-accent e-quiet"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-img-wrap"&gt;&lt;img src="quiet.jpeg" alt="Quiet Moon"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="editorial-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="editorial-name e-quiet-text"&gt;Quiet Moon&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-phase"&gt;Luteal · Days 16–28&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="editorial-desc"&gt;The most needed blend. Deeply calming nervines to hold you through the hardest phase of your cycle with grace.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="editorial-bottom"&gt;&lt;span class="editorial-price"&gt;$20&lt;/span&gt;&lt;span class="editorial-shop-link"&gt;Shop →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="teas-cta"&gt;&lt;button class="btn-dark" onclick="showPage('shop')"&gt;Shop all teas&lt;/button&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="bundle"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="bundle-eyebrow"&gt;Our most beloved offering&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2&gt;The Full Cycle Set&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="bundle-sub"&gt;All four phase tins in a keepsake gift box, with a printed cycle guide card and brewing ritual. For yourself — or the woman in your life who deserves to be understood.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="bundle-price"&gt;$70&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="bundle-detail"&gt;Four tins · Cycle guide · Keepsake gift box&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button class="btn-ghost" onclick="showPage('shop')"&gt;Shop the set&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="founder"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="founder-mark"&gt;A&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="founder-label"&gt;Founder&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="founder-name"&gt;Anna&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="founder-title"&gt;Minneapolis, Minnesota&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="founder-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Luna Jing was born from personal curiosity. After years of navigating health challenges and searching for answers, I began exploring holistic wellness, herbal traditions, and Traditional Chinese Medicine.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="pull-quote"&gt;"Chinese medicine is rooted in ancient traditions and holistic principles that view the body, mind, heart, and spirit as interconnected."&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Luna Jing became the answer. This company is not built on the idea that I know everything — it is built on a commitment to lifelong learning. As Luna Jing grows, I plan to pursue formal education and certification in TCM so this brand continues to evolve with integrity, humility, and deep respect for one of the world's oldest healing systems.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="vision"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="vision-inner"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="eyebrow-line"&gt;Our vision&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2&gt;A future where women understand their bodies as naturally as they understand &lt;em&gt;the changing seasons&lt;/em&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Where periods are discussed without shame. Where hormonal changes are expected instead of feared. Where wellness is rooted in education instead of confusion.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="vision-values"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;span class="value-pill"&gt;Wisdom&lt;/span&gt;&lt;span class="value-pill"&gt;Education&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;span class="value-pill"&gt;Beauty&lt;/span&gt;&lt;span class="value-pill"&gt;Integrity&lt;/span&gt;&lt;span class="value-pill"&gt;Rhythm&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;section class="footer-banner"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Welcome to &lt;span&gt;Luna Jing&lt;/span&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p&gt;Your body was never meant to be a mystery. It was meant to be understood. Welcome home.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button class="btn-dark" onclick="showPage('shop')"&gt;Begin your ritual&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div&gt;&lt;div class="footer-brand"&gt;&lt;em&gt;Luna&lt;/em&gt; Jing&lt;/div&gt;&lt;div class="footer-tagline"&gt;Brew with your cycle.&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="footer-copy"&gt;© 2025 Luna Jing · Minneapolis, MN&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;!-- SHOP --&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div class="page" id="page-shop"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="shop-hero"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="eyebrow-line"&gt;The collection&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Our &lt;em&gt;Teas&lt;/em&gt;&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p&gt;Six products crafted for every phase of your cycle. Formulated in Traditional Chinese Medicine, designed for the modern woman.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="shop-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="shop-section-label"&gt;Our signature offering&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="featured-product"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="featured-img"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-img-badge"&gt;Best seller&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-art-grid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;img src="images/scarlet.jpeg" alt="Scarlet Rest"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;img src="images/rising.jpeg" alt="Rising Green"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;img src="images/golden.jpeg" alt="Golden Peak"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;img src="images/quiet.jpeg" alt="Quiet Moon"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="featured-content"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-eyebrow"&gt;The Luna Jing signature set&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2 class="featured-title"&gt;The Full&lt;br&gt;&lt;em&gt;Cycle Set&lt;/em&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-sub"&gt;All four phases · Complete ritual&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p class="featured-desc"&gt;One tin for each phase of your cycle, nestled in a keepsake gift box with a printed cycle guide card. The most complete introduction to living in rhythm with your body.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-includes"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="featured-includes-label"&gt;What's inside&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Scarlet Rest&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Menstrual · 2 oz&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Rising Green&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Follicular · 2 oz&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Golden Peak&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Ovulation · 2 oz&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Quiet Moon&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Luteal · 2 oz&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Printed cycle guide card&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Included&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="include-item"&gt;&lt;span&gt;Keepsake gift box&lt;/span&gt;&lt;span style="color:var(--faint);font-size:11px"&gt;Included&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="featured-pricing"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="featured-price"&gt;$70&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;span class="featured-saving"&gt;Save $10 vs. individual&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button class="btn-plum"&gt;Add to cart&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="shop-section-label"&gt;Individual tins&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="tins-grid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="tin-card t-scarlet"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-img-wrap"&gt;&lt;img src="images/scarlet.jpeg" alt="Scarlet Rest"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-accent-bar"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="tin-name"&gt;Scarlet Rest&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="tin-phase"&gt;Menstrual · Days 1–5&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-desc"&gt;Iron-replenishing and deeply warming. A ritual for your body's hardest-working days.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-herbs"&gt;Red Raspberry Leaf · Nettle · Ginger · Rose Petals · Chamomile · Cinnamon&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-footer"&gt;&lt;span class="tin-price"&gt;$20&lt;/span&gt;&lt;span class="tin-add"&gt;Add to cart →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="tin-card t-rising"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-img-wrap"&gt;&lt;img src="images/rising.jpeg" alt="Rising Green"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-accent-bar"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="tin-name"&gt;Rising Green&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="tin-phase"&gt;Follicular · Days 6–13&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-desc"&gt;Bright, liver-cleansing, and energizing. Feeds your ascending momentum with a clean finish.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-herbs"&gt;Tulsi · Chrysanthemum · Dandelion Root · Goji Berry · Nettle · Lemon Verbena&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-footer"&gt;&lt;span class="tin-price"&gt;$20&lt;/span&gt;&lt;span class="tin-add"&gt;Add to cart →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="tin-card t-golden"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-img-wrap"&gt;&lt;img src="images/golden.jpeg" alt="Golden Peak"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-accent-bar"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="tin-name"&gt;Golden Peak&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="tin-phase"&gt;Ovulation · Days 14–15&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-desc"&gt;Antioxidant-rich and radiant. A celebration blend for your most expansive days.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-herbs"&gt;Rose Hips · Hibiscus · Goji Berry · Tulsi · Calendula · Lemon Peel&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-footer"&gt;&lt;span class="tin-price"&gt;$20&lt;/span&gt;&lt;span class="tin-add"&gt;Add to cart →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="tin-card t-quiet"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-img-wrap"&gt;&lt;img src="images/quiet.jpeg" alt="Quiet Moon"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-accent-bar"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-body"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="tin-name"&gt;Quiet Moon&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="tin-phase"&gt;Luteal · Days 16–28&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-desc"&gt;Deeply calming nervines. Reach for this when everything feels like too much.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="tin-herbs"&gt;Lemon Balm · Skullcap · Oatstraw · Rose Petals · Passionflower · Lavender&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="tin-footer"&gt;&lt;span class="tin-price"&gt;$20&lt;/span&gt;&lt;span class="tin-add"&gt;Add to cart →&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="shop-section-label" style="margin-top:72px"&gt;Coming soon&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="coming-grid"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="coming-card"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="coming-placeholder"&gt;Art&lt;br&gt;coming&lt;br&gt;soon&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="coming-badge"&gt;Coming soon&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="coming-name"&gt;Bloom Blend&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="coming-desc"&gt;A pregnancy support blend formulated to nourish, calm, and sustain — gentle, grounding, and deeply intentional.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="coming-card"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="coming-placeholder"&gt;Art&lt;br&gt;coming&lt;br&gt;soon&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="coming-badge"&gt;Coming soon&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;h3 class="coming-name"&gt;Golden Root&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;p class="coming-desc"&gt;A postpartum restoration blend to replenish and rebuild. Because the woman who just grew a life deserves to be held too.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="notify-bar"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p&gt;Be the first to know when Bloom Blend &amp; Golden Root arrive.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="notify-form"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;input type="email" placeholder="your@email.com"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button&gt;Notify me&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div&gt;&lt;div class="footer-brand"&gt;&lt;em&gt;Luna&lt;/em&gt; Jing&lt;/div&gt;&lt;div class="footer-tagline"&gt;Brew with your cycle.&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="footer-copy"&gt;© 2025 Luna Jing · Minneapolis, MN&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1">function showPage(id){</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.page').forEach(p=&gt;p.classList.remove('active'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.getElementById('page-'+id).classList.add('active');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>document.querySelectorAll('.nav-links a').forEach(a=&gt;a.classList.remove('active'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if(id==='shop') document.getElementById('nav-teas').classList.add('active');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>window.scrollTo({top:0,behavior:'smooth'});</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
